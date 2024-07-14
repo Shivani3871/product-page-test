@@ -10,7 +10,16 @@ const router = createRouter({
     {
       path: '/shop/product/:slug',
       name: 'product',
-      component: () => import('./views/Product.vue')
+      component: () => import('./views/Product.vue'),
+    },
+    {
+      path: '/not-found',
+      name: 'not-found',
+      component: () => import('./views/Error/NotFound.vue')
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      redirect: { name: 'not-found' }
     }
   ],
 })
