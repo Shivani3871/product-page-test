@@ -29,10 +29,10 @@
                         </p>
                         <div class="product-information__price">
                             <div class="product-information__price--text">
-                                <span>${{ data?.price?.discounted || 0.00 }}</span>
-                                <del>${{ data?.price?.full || 0.00 }}</del>
+                                <span>${{ getDiscountedPrice }}</span>
+                                <del>${{ getFullPrice }}</del>
                             </div>
-                            <span class="product-information__price--offer-percentage">{{ data?.discount?.amount || 0 }}{{ data?.discount?.type == 'percent' ? '%' : '' }}</span>
+                            <span class="product-information__price--offer-percentage">{{ getDiscountAmount }}{{ getDiscountType }}</span>
                         </div>
                         <div class="product-information__addtocart-box">
                             <div class="product-information__addtocart-box--quantity-input">
@@ -112,6 +112,20 @@
       addToCart() {
         console.log(`Added ${this.quantity} items to the cart`);
       },
+    },
+    computed:{
+        getDiscountedPrice() {
+        return this.data?.price?.discounted || 0.00;
+        },
+        getFullPrice() {
+            return this.data?.price?.full || 0.00;
+        },
+        getDiscountAmount() {
+            return this.data?.discount?.amount || 0;
+        },
+        getDiscountType() {
+            return this.data?.discount?.type == 'percent' ? '%' : '';
+        }
     },
     created()
     {
